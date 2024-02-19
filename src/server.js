@@ -1,11 +1,11 @@
 import express from 'express';
 import morgan from 'morgan';
 import MainRouter from "./routes/index.js";
-const mainRouter = new MainRouter();
 import { errorHandler } from './middlewares/errorHandler.js';
 import { Command } from "commander";
 import "dotenv/config.js";
 
+const mainRouter = new MainRouter();
 const app = express();
 
 const commander = new Command();

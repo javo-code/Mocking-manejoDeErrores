@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { verifyToken } from "../middlewares/verifyToken.js";
-import { authorizeAdmin, authorizeUser } from "../middlewares/authRol.js";
+import userValidator from "../middlewares/userValidator.js";
 import UserCntroller from "../controllers/user.controller.js"
 
 const router = Router();
@@ -11,7 +11,7 @@ router.get("/", controller.getAll)
     .post("/", controller.create)
     .put("/:id", controller.update)
     .delete("/:id", controller.delete)
-    .post("/register", controller.register)
+    .post("/register", userValidator, controller.register)
     .post("/login", controller.login)
     .get("/private", verifyToken, (req, res) => {
   const { first_name, last_name, email, role } = req.user;
