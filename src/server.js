@@ -23,10 +23,11 @@ app.use('/api', mainRouter.getRouter());
 
 app.use(errorHandler);
 
-const PORT = process.argv[2] || 8080;
+const PORT = /* process.argv[2] || */ 8080;
 const mode = commander.opts().m
 
 app.listen(PORT, () => {
     console.log(`🚀 SERVER UP ON PORT ${PORT} IN ${mode} MODE` );
 });
 
+export default app;

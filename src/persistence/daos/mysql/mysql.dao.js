@@ -1,12 +1,11 @@
-export default class MongoDao {
+export default class MySqlDao {
   constructor(model) {
     this.model = model;
   }
 
   async getAll() {
     try {
-      const response = await this.model.find({});
-      return response;
+      return await this.model.findAll();
     } catch (error) {
       console.log(error);
     }
@@ -14,8 +13,11 @@ export default class MongoDao {
 
   async getById(id) {
     try {
-      const response = await this.model.findById(id).populate("products.product");
-      return response;
+      return this.model.findOne({
+        where: {
+          id: id,
+        },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -23,17 +25,19 @@ export default class MongoDao {
 
   async create(obj) {
     try {
-      const response = await this.model.create(obj);
-      return response;
+      await this.model.create(obj);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async update(id, obj) {
+  async update(id, body) {
     try {
-      await this.model.updateOne({ _id: id }, obj);
-      return obj;
+      return await this.model.update(body, {
+        where: {
+          id: id,
+        },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -41,8 +45,11 @@ export default class MongoDao {
 
   async delete(id) {
     try {
-      const response = await this.model.findByIdAndDelete(id);
-      return response;
+      return await this.model.destroy({
+        where: {
+          id: id,
+        },
+      });
     } catch (error) {
       console.log(error);
     }
