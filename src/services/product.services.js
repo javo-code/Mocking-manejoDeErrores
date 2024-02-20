@@ -20,7 +20,7 @@ export default class ProductService extends Services {
     }
   };
 
-  async createProductsMock(cant = 50){
+  async createProductsMock(cant = 100){
     try {
       const productsArray = [];
       for (let i = 0; i < cant; i++) {

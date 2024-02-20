@@ -12,5 +12,3 @@ export const createRandomProd = () => {
     thumbnails: faker.image.url()
   };
 };
-
-console.log(createRandomProd());
