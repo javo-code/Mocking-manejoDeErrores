@@ -12,6 +12,7 @@ router
     .put("/:id", controller.update)
     .delete("/:id", controller.delete)
     .get("/dto/:id", controller.getProdById)
+    .post("/products-mock", controller.createRandomProducts)
 
 
 export default router;
