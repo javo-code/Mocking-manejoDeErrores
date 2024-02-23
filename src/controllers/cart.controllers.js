@@ -19,7 +19,7 @@ export default class CartController extends Controllers {
       else res.json(newProdToUserCart);
     } catch (error) {
       console.log("👹Error desde el addProd del carts.controller:",error); // Agrega un registro de depuración
-      next(error.message);
+      next(error);
     }
   };
 
@@ -34,7 +34,7 @@ export default class CartController extends Controllers {
       if (!delProdToUserCart) res.json({ msg: "Error remove product to cart" });
       else res.json({msg: `product ${idProd} deleted to cart`});
     } catch (error) {
-      next(error.message);
+      next(error);
     }
   };
 
@@ -51,7 +51,7 @@ export default class CartController extends Controllers {
       if (!updateProdQuantity) res.json({ msg: "Error update product quantity to cart" });
       else res.json(updateProdQuantity);
     } catch (error) {
-      next(error.message);
+      next(error);
     }
   };
 
@@ -64,7 +64,7 @@ export default class CartController extends Controllers {
       if (!clearCart) res.json({ msg: "Error clear cart" });
       else res.json(clearCart);
     } catch (error) {
-      next(error.message);
+      next(error);
     }
   };
 }

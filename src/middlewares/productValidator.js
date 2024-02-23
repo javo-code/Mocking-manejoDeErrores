@@ -27,7 +27,7 @@ export const productValidator = (req, res, next) =>{
       \n stock: must be => "number"
       \n category: must be => "string"
       \n thumbnails: must be => "string"`
-    );7
+    );
   } else {
     next();
   }

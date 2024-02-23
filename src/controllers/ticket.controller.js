@@ -9,7 +9,7 @@ export const generateTicket = async (req, res, next) => {
     if(!ticket) res.status(404).json({msg: 'Error generate ticket'});
     else res.status(200).json(ticket)
   } catch (error) {
-    next(error.message);
+    next(error);
   }
 };
 

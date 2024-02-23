@@ -34,7 +34,7 @@ export default class UserController extends Controllers {
         createResponse(res, 200, token);
       }
     } catch (error) {
-      next(error.message);
+      next(error);
     }
   };
 
@@ -48,7 +48,7 @@ export default class UserController extends Controllers {
         role,
       });
     } catch (error) {
-      next(error.message);
+      next(error);
     }
   };
 }

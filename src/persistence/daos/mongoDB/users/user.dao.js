@@ -19,7 +19,6 @@ export default class UserMongoDao extends MongoDao {
         else return userExist
       } return false
     } catch (error) {
-      console.log(error)
       throw new Error(error)
     }
   }
@@ -46,7 +45,6 @@ async createUser(user) {
         return false;
       }
     } catch (error) {
-      console.log(error)
       throw new Error(error)
     }
   }
@@ -59,7 +57,6 @@ async createUser(user) {
         return userExist
       } return false
     } catch (error) {
-      console.log(error)
       throw new Error(error)
     }
   }

@@ -33,4 +33,4 @@ export default class ProductService extends Services {
       console.log(error);
     }
   };
-};
+}

@@ -8,9 +8,9 @@ export default class Controllers {
   getAll = async (req, res, next) => {
     try {
       const items = await this.service.getAll();
-      return httpResponse.Ok(res, items)
+      return httpResponse.Ok(res, items);
     } catch (error) {
-      next(error.message);
+      next(error)
     }
   };
 
@@ -28,30 +28,22 @@ export default class Controllers {
   create = async (req, res, next) => {
     try {
       const newItem = await this.service.create(req.body);
-      if (!newItem)
-        createResponse(res, 404, {
-          method: "create",
-          error: "Error create item!",
-        });
-      else createResponse(res, 200, newItem);
+      if (!newItem) return httpResponse.invalidDataType(res, "invalid data fields");
+      else return httpResponse.Ok(res, newItem);
     } catch (error) {
-      next(error.message);
+      next(error)
     }
   };
 
   update = async (req, res, next) => {
     try {
       const { id } = req.params;
-      const item = await this.service.getById(id);
-      if (!item)
-        createResponse(res, 404, {
-          method: "update",
-          error: "Error update item!",
-        });
-      const itemUpd = await this.service.update(id, req.body);
-      createResponse(res, 200, itemUpd);
+      let item = await this.service.getById(id);
+      if (!item) return httpResponse.NotFound(res, "Item not found!");
+      const itemUpdated = await this.service.update(id, req.body);
+      return httpResponse.Ok(res, itemUpdated);
     } catch (error) {
-      next(error.message);
+      next(error)
     }
   };
 
@@ -59,15 +51,13 @@ export default class Controllers {
     try {
       const { id } = req.params;
       const item = await this.service.getById(id);
-      if (!item)
-        createResponse(res, 404, {
-          method: "delete",
-          error: "Error delete item!",
-        });
-      const itemUpd = await this.service.delete(id);
-      createResponse(res, 200, itemUpd);
+      if (!item) return httpResponse.NotFound(res, "Item not found!");
+      await this.service.delete(id);
+      return httpResponse.Ok(res, "item deleted");
     } catch (error) {
-      next(error.message);
+      next(error)
     }
   };
 }
+
+
