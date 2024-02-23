@@ -7,7 +7,9 @@ const HttpStatus = {
   INTERNAL_SERVER_ERROR: 500,
 };
 
-
+export const errorsDictionary = {
+  ERROR_CREATE_PRODUCT: 'Error creating product - You must to complete all fields with the correct data type:',
+}
 export class HttpResponse {
   Ok(res, data) {
     return res.status(HttpStatus.OK).json({
@@ -28,14 +30,14 @@ export class HttpResponse {
   invalidDataType(res, data) {
     return res.status(HttpStatus.BAD_REQUEST).json({
       status: HttpStatus.BAD_REQUEST,
-      message: `You must to complete all fields with the correct data type: 
-      \n title: must be => "string" 
-      \n description: must be => "string" 
-      \n code: must be => "string" 
-      \n price: must be => "number" 
-      \n stock: must be => "number"
-      \n category: must be => "string"
-      \n thumbnails: must be => "string"`,
+      message: ` 
+        \n title: must be => "string" 
+        \n description: must be => "string" 
+        \n code: must be => "string" 
+        \n price: must be => "number" 
+        \n stock: must be => "number"
+        \n category: must be => "string"
+        \n thumbnails: must be => "string"`,
       error: data,
     });
   }

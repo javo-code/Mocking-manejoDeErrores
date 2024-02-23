@@ -1,6 +1,6 @@
 import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse();
-
+import { errorsDictionary } from "../utils/http.response.js";
 export default class Controllers {
   constructor(service) {
     this.service = service;
@@ -28,7 +28,7 @@ export default class Controllers {
   create = async (req, res, next) => {
     try {
       const newItem = await this.service.create(req.body);
-      if (!newItem) return httpResponse.invalidDataType(res, "invalid data fields");
+      if (!newItem) return httpResponse.NotFound(res, errorsDictionary.ERROR_CREATE_PRODUCT);
       else return httpResponse.Ok(res, newItem);
     } catch (error) {
       next(error)
