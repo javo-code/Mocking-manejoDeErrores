@@ -1,24 +1,24 @@
 import Controllers from "./class.controller.js";
 import ProductService from "../services/product.services.js";
 const productService = new ProductService();
-import { createResponse } from "../utils.js";
 
 export default class ProductController extends Controllers {
   constructor() {
     super(productService);
   }
 
-  async getProdById(req, res, next) {
+getById = async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const prod = await this.service.getProdById(id);
-      if (!prod)
-        createResponse(res, 404, { method: "create", error: "getById Failes" })
-      else createResponse(res, 200, prod);
+        const { id } = req.params;
+        const item = await this.service.getById(id);
+        if (!item)
+            return httpResponse.NotFound(res, "Item not found!");
+        else
+            return httpResponse.Ok(res, item);
     } catch (error) {
-      next(error.message);
+        next(error.message);
     }
-  };
+};
 
   async createRandomProducts(req, res, next) {
     try {
@@ -27,7 +27,7 @@ export default class ProductController extends Controllers {
       res.status(200).json({ products: response })
       return response;
     } catch (error) {
-      console.log(error)
+      throw new Error(error.message)
     }
   }
 
@@ -36,7 +36,7 @@ export default class ProductController extends Controllers {
         const response = await productService.getAll();
         res.json(response);
       } catch (error) {
-        console.log(error)
+        throw new Error(error.message)
       }
     }
 

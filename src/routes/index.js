@@ -15,12 +15,12 @@ export default class MainRouter {
   }
 
   initRoutes() {
-    this.router.use("/chat", chatRouter);
+    this.router.use("/products", productRouter);
+    this.router.use("/users", userRouter);
     this.router.use("/carts", cartRouter);
     this.router.use('/mail', emailRouter);      
-    this.router.use("/products", productRouter);
     this.router.use("/ticket", ticketRouter);
-    this.router.use("/users", userRouter);
+    this.router.use("/chat", chatRouter);
   }
 
   getRouter() {

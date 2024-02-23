@@ -17,7 +17,7 @@ export default class Services {
       if (!item) return false;
       else return item;
     } catch (error) {
-      console.log("👹 Error en el getById del class.services => ", error);
+      throw new Error(error.message);
     }
   };
 

@@ -17,9 +17,10 @@ export default class MongoDao {
       const response = await this.model.findById(id);
       return response;
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   }
+
 
   async create(obj) {
     try {

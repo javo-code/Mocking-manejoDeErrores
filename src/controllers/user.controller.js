@@ -3,7 +3,6 @@ import UserService from "../services/user.services.js";
 const userService = new UserService();
 import UserMongoDao from "../persistence/daos/mongoDB/users/user.dao.js";
 const userDao = new UserMongoDao();
-import { createResponse } from "../utils.js";
 
 export default class UserController extends Controllers {
   constructor() {

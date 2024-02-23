@@ -1,4 +1,5 @@
-import { createResponse } from "../utils.js";
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse();
 
 export default class Controllers {
   constructor(service) {
@@ -7,7 +8,7 @@ export default class Controllers {
   getAll = async (req, res, next) => {
     try {
       const items = await this.service.getAll();
-      res.status(200).json(items);
+      return httpResponse.Ok(res, items)
     } catch (error) {
       next(error.message);
     }
@@ -17,14 +18,10 @@ export default class Controllers {
     try {
       const { id } = req.params;
       const item = await this.service.getById(id);
-      if (!item)
-        createResponse(res, 404, {
-          method: "getById",
-          error: "Item not found!",
-        });
-      else createResponse(res, 200, item);
+      if (!item) return httpResponse.NotFound(res, "Item not found!");
+      else return httpResponse.Ok(res, item);
     } catch (error) {
-      next(error.message);
+      next(error)
     }
   };
 

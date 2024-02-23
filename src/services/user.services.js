@@ -38,7 +38,7 @@ export default class UserService extends Services {
     }
   }
 
-  async geUserByEmail(email){
+  async getUserByEmail(email){
     try {
       const user = await userDao.getByEmail(email);
       if (!user) return false;
